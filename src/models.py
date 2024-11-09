@@ -61,6 +61,8 @@ class FavoritoPersona(db.Model):
     id_favorito = db.Column(db.Integer, primary_key=True)
     id_usuario = db.Column(db.Integer, db.ForeignKey('usuarios.id_usuario'), nullable=False)
     id_persona = db.Column(db.Integer, db.ForeignKey('personas.id_persona'), nullable=False)
+    usuario = db.relationship('Usuario', backref='favoritos_personas')
+    persona = db.relationship('Persona', backref='favoritos_personas')
 
     def a_dict(self):
         return {
@@ -74,6 +76,8 @@ class FavoritoPlaneta(db.Model):
     id_favorito = db.Column(db.Integer, primary_key=True)
     id_usuario = db.Column(db.Integer, db.ForeignKey('usuarios.id_usuario'), nullable=False)
     id_planeta = db.Column(db.Integer, db.ForeignKey('planetas.id_planeta'), nullable=False)
+    usuario = db.relationship('Usuario', backref='favoritos_planetas')
+    planeta = db.relationship('Planeta', backref='favoritos_planetas')
 
     def a_dict(self):
         return {

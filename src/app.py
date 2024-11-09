@@ -63,6 +63,9 @@ def obtener_favoritos_usuario():
 @app.route('/favorito/planeta/<int:id_planeta>', methods=['POST'])
 def agregar_favorito_planeta(id_planeta):
     id_usuario = 1  # Reemplazar con el ID del usuario real cuando se implemente autenticación
+    if not usuario:
+        raise APIException('Usuario no encontrado', codigo_estado=404)
+    
     favorito = FavoritoPlaneta(id_usuario=id_usuario, id_planeta=id_planeta)
     db.session.add(favorito)
     db.session.commit()
@@ -132,4 +135,4 @@ def obtener_planeta(id_planeta):
 # Ejecutar solo si se ejecuta `$ python src/app.py`
 if __name__ == '__main__':
     PUERTO = int(os.environ.get('PUERTO', 3000))
-    app.run(host='0.0.0.0', port=PUERTO, debug=False)
+    app.run(host='0.0.0.0', port=PUERTO, debug=True)
